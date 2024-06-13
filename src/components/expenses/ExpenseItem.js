@@ -32,7 +32,7 @@ const ExpenseItem = ({date, title, price}) => {
        setItemTitle("ㅋㅋ")
     }
 
-    console.log('렌더링 전');
+    // console.log('렌더링 전');
 
     return (
         <Card className='expense-item'>
