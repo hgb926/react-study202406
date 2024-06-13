@@ -1,8 +1,7 @@
 import './App.css';
 import React from 'react';
-import ExpenseItem from './components/expenses/ExpenseItem'
 import ExpenseList from './components/expenses/ExpenseList'
-import Greet from './components/Greet'
+import NewExpense from './components/new-expense/NewExpense'
 
 
 const App = () => {
@@ -28,26 +27,8 @@ const App = () => {
 
     return (
         <>
+            <NewExpense />
             <ExpenseList expenses={expenses} />
-            {/*<Greet>*/}
-            {/*    /!* children 이라는 개념. *!/*/}
-            {/*    <ul>*/}
-            {/*        <li>사과</li>*/}
-            {/*        <li>포도</li>*/}
-            {/*        <li>오렌지</li>*/}
-            {/*    </ul>*/}
-            {/*</Greet>*/}
-            {/*<Greet>*/}
-            {/*    <ol>*/}
-            {/*        <li>하나</li>*/}
-            {/*        <li>둘</li>*/}
-            {/*        <li>셋</li>*/}
-            {/*    </ol>*/}
-            {/*</Greet>*/}
-            {/*<Greet>*/}
-            {/*    <a href={'#'}>링크</a>*/}
-            {/*</Greet>*/}
-
         </>
     );
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ExpenseItem.css'
 import ExpenseDate from './ExpenseDate'
 import Card from '../UI/Card'
@@ -6,12 +6,17 @@ import Card from '../UI/Card'
 
 const ExpenseItem = ({date, title, price}) => {
 
+    // let itemTitle = title;
 
-    // 변수를 넣고싶으면 여기서 선언
-    // const expenseDate = date;
-    // const expenseTitle = title;
-    // const expensePrice = price;
+    // userState는 컴포넌트의 상태값을 관리하며 이 상태값은 렌더링에 영향을 미침
+    /*
+        - useState훅의 리턴값은 배열이며 (length가 2)
+        - 첫번째 요소는 관리할 상태값의 초기값. useState() 괄호 안에서 초기값 생성
+        - 두번째 요소는 해당 상태값을 변경할 때 사용하는 setter함수
+     */
 
+    // useState()에 title을 넣어서 초기값 등록.
+    const [itemTitle, setItemTitle] = useState(title); // 디스트럭쳐링
 
     // 다른 모듈에서도 사용해야 할 함수라면 외부에서 작성 후, export하면 됨.
 
@@ -20,25 +25,23 @@ const ExpenseItem = ({date, title, price}) => {
 
     // 이벤트 핸들러 선언
     const clickHandler = e => {
-        console.log('클릭함!')
-        // console.log(e.target.previousElementSibling.firstElementChild.textContent)
 
-        // DOM이 형성된 시점이기 때문에 여기서는 docu.qs이 가능하다
-        // let $price = document.querySelector('.expense-item__price');
-        // console.log($price) 가능
-
-
+        /*
+            useState가 관리하는 상태값은 반드시 setter로만 변경해야 한다!
+         */
+       setItemTitle("ㅋㅋ")
     }
+
+    console.log('렌더링 전');
 
     return (
         <Card className='expense-item'>
             <ExpenseDate exDate={date}/>
             <div className="expense-item__description">
-                <h2>{title}</h2>
+                <h2>{itemTitle}</h2>
                 <div className="expense-item__price">{formattedPrice}원</div>
             </div>
-            <button id={'btn'} onClick={clickHandler}>버튼</button>
-            <button id={'btn2'} onMouseOver={e => {alert('하하'); }}>버튼2</button>
+            <button id={'btn'} onClick={clickHandler}>제목수정</button>
         </Card>
     );
 };
