@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ExpenseForm.css';
 
-const ExpenseForm = ({ onAdd }) => {
+const ExpenseForm = ({ onAdd, onCancle }) => {
 
     // 오늘 날짜를 YYYY-MM-DD 형식으로 가져오는 함수
     const getTodayDate = () => {
@@ -110,6 +110,7 @@ const ExpenseForm = ({ onAdd }) => {
                 </div>
             </div>
             <div className="new-expense__actions">
+                <button type="button" onClick={onCancle}>Cancle</button>
                 <button type="submit">Add Expense</button>
             </div>
         </form>
