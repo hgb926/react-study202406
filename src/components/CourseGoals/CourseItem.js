@@ -1,5 +1,5 @@
 import React from 'react';
-import './CourseItem.css'
+import styles from './CourseItem.module.css'; // 변수명을 하나 만들어준다.
 
 const CourseItem = ({ item, onDelete }) => {
 
@@ -9,7 +9,7 @@ const CourseItem = ({ item, onDelete }) => {
     }
 
     return (
-        <li className="goal-item" onClick={deleteHandler}>
+        <li className={styles['goal-item']} onClick={deleteHandler}>
             {item.text}
         </li>
     );
