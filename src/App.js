@@ -1,53 +1,31 @@
 import React, { useState } from 'react';
-import CourseInput from './components/CourseGoals/CourseInput';
-import CourseList from './components/CourseGoals/CourseList';
 import './App.css';
-
-// 기본 더미 데이터
-const DUMMY_DATA = [
-    {
-        id: 'g1',
-        text: '리액트 컴포넌트 스타일 마스터하기'
-    },
-    {
-        id: 'g2',
-        text: 'UI/UX 프로그래밍 쌉고수되기'
-    },
-];
-
+import AddUsers from './components/Users/AddUsers';
+import UserList from './components/Users/UserList';
 
 
 
 const App = () => {
 
-    const [goals, setGoals] = useState(DUMMY_DATA);
+    // 회원들이 저장될 배열
+    const [userList, setUserList] = useState([]);
 
-    // CourseInput에게 전달할 함수
-    const addGoalHandler = (goalObject) => {
-        setGoals([...goals, goalObject]); // [...기존, 새거]
-    }
-
-    // CourseItem에게 전달할 함수
-    const deleteGoalHandler = (id) => {
-
-        // goals.splice(goals.findIndex(g => g.id === id), 1)
-
-        const filteredGoals
-            = goals.filter(g => g.id !== id)
-
-        // filter, map은 새 배열을 return해서 setter에 바로 넣어도 됨.
-        setGoals(filteredGoals);
-    }
+    const addUserHandler = user => {
+        console.log(user);
+        setUserList(prev => [
+            ...prev, // 기존 회원 복사해서 오고,
+            {
+                // 추가 회원 등록을 여기서
+                ...user, // 기존 유저의 username, age가 들어있고,
+                id: Math.random().toString()} // id를 여기서 생성해서 부여.
+        ]);
+    };
 
     return (
-        <div>
-            <section id="goal-form">
-                <CourseInput onAdd={addGoalHandler} />
-            </section>
-            <section id="goals">
-                <CourseList items={goals} onDelete={deleteGoalHandler} />
-            </section>
-        </div>
+        <>
+            <AddUsers onAddUser={addUserHandler} />
+            <UserList users={userList}/>
+        </>
     );
 };
 
