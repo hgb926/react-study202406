@@ -4,6 +4,7 @@ import Button from '../Button';
 import styles from './ErrorModal.module.css';
 // portal을 사용하기 위한 불러오기
 import ReactDOM from 'react-dom';
+import Portal from '../Portal/Portal'
 
 
 const BackDrop = ({onClose}) => {
@@ -31,26 +32,16 @@ const ModalOveray = ({title, message, onClose}) => {
 const ErrorModal = ({title, message, onClose}) => {
     return (
         <>
-            {
-                ReactDOM.createPortal(
-                    <BackDrop
-                        onClose={onClose}
-                    />,
-                    document.getElementById('backdrop-root')
-                )
-            }
-
-            {
-                ReactDOM.createPortal(
-                    <ModalOveray
-                        title={title}
-                        message={message}
-                        onClose={onClose}
-                    />,
-                    document.getElementById('overay-root')
-                )
-            }
-
+            <Portal destId={'backdrop-root'}>
+                <BackDrop onClose={onClose}/>
+            </Portal>
+            <Portal destId={'overay-root'}>
+                <ModalOveray
+                    onClose={onClose}
+                    title={title}
+                    message={message}
+                />
+            </Portal>
         </>
     );
 };

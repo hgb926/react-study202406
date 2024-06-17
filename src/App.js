@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import './App.css';
 import AddUsers from './components/Users/AddUsers';
 import UserList from './components/Users/UserList';
@@ -10,7 +10,15 @@ const App = () => {
     // 회원들이 저장될 배열
     const [userList, setUserList] = useState([]);
 
+    const count = useRef(1);
+    console.log('count: ', count)
+
     const addUserHandler = user => {
+
+        count.current++;
+        console.log('count.current: ', count.current);
+        // useRef는 참조값 기억을 해놨다가, (마치 전역변수 처럼)
+
         console.log(user);
         setUserList(prev => [
             ...prev, // 기존 회원 복사해서 오고,
