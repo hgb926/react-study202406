@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './scss/TodoMain.scss';
 import TodoItem from './TodoItem';
 
 const TodoMain = ({ todoList }) => {
+    const [renderList, setRenderList] = useState([]);
+
+    useEffect(() => {
+        setRenderList(todoList);
+    }, [todoList]);
+
+    const onRemove = (id) => {
+        setRenderList(renderList.filter((item) => item.id !== id));
+    };
+
     return (
         <ul className='todo-list'>
-            {todoList.map(todo => (
-                <TodoItem key={todo.key} todo={todo} />
+            {renderList.map(todo => (
+                <TodoItem key={todo.id} todo={todo} onRemove={onRemove} />
             ))}
         </ul>
     );

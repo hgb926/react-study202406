@@ -7,22 +7,17 @@ import './scss/TodoTemplate.scss';
 const TodoTemplate = () => {
     const [todoList, setTodoList] = useState([]);
 
-    // input에서 todo값 받아옴. 데이터 받아와야 함
+
     const onTodoList = (todo) => {
-        setTodoList(prevTodoList => [
-            ...prevTodoList,
-            {
-                text: todo,
-                key: Math.random()
-            }
-        ]);
+        console.log(todo)
+        setTodoList(prevTodoList => [...prevTodoList, todo])
     };
 
-    console.log(todoList);
+
 
     return (
         <div className='TodoTemplate'>
-            <TodoHeader />
+            <TodoHeader todoList={todoList} />
             <TodoMain todoList={todoList} />
             <TodoInput onTodoList={onTodoList} />
         </div>
