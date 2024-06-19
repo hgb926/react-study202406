@@ -3,6 +3,7 @@ import './App.css';
 import MainHeader from './components/SideEffect/MainHeader';
 import Home from './components/SideEffect/Home';
 import Login from './components/SideEffect/Login';
+import AuthContext from './store/auth-context'
 
 
 const App = () => {
@@ -43,13 +44,17 @@ const App = () => {
     }
 
     return (
-        <>
-            <MainHeader onLogout={logoutHandler} />
+        <AuthContext.Provider value={{
+            isLoggedIn: isLoggedIn,
+            onLogout: logoutHandler
+        // context의 제공자인 App.js가 가지고 있는 값을 사용.
+        }}>
+            <MainHeader />
             <main>
                 {isLoggedIn && <Home/>}
                 {!isLoggedIn && <Login onLogin={loginHandler}/>}
             </main>
-        </>
+        </AuthContext.Provider>
     )
 }
 
