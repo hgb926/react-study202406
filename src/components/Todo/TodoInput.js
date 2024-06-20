@@ -1,63 +1,54 @@
-import React, { useState } from 'react';
-import { MdAdd } from "react-icons/md";
+import React, { useState, useRef } from 'react';
+import { MdAdd } from 'react-icons/md';
 
 import './scss/TodoInput.scss';
 
-const TodoInput = ({ onTodoList }) => {
-    // const hoverEffect = e => {
-    //     document.querySelector('.insert-btn').classList.toggle('active')
-    //     // 보류
-    // }
+const TodoInput = ({ onAdd }) => {
 
-    // 인풋 입력값
-    const [enteredText, setEnteredText] = useState('');
+    // input의 주소값을 기억하는 변수 생성
+    // react에선 document.qs 대신 useRef를 사용하여 돔과 연결.
+    const $textInput = useRef();
 
-    // 입력값 검증
-    const [isValid, setIsValid] = useState(true);
 
-    const formSubmitHandler = (e) => {
+    // 입력창 토글링 상태값
+    const [open, setOpen] = useState(false);
+
+    // 버튼 토글링 함수
+    const onToggle = () => setOpen(prevOpen => !prevOpen);
+
+
+    const submitHandler = e => {
         e.preventDefault();
+        // document.querySelect('.text').value 와 동일
+        onAdd($textInput.current.value);
 
-        if (enteredText.trim().length === 0) {
-            setIsValid(false)
-            return;
-        }
+        // form이 제출되면 입력창 비우기
+        $textInput.current.value = '';
+        setOpen(false)
+    };
 
-        const newTodoList = {
-            id: Math.random().toString(),
-            text: enteredText,
-        }
-        onTodoList(newTodoList)
 
-        setEnteredText('')
-    }
-
-    const goalChangeHandler = e => {
-        const inputValue = e.target.value;
-
-        // 입력값 검증
-        if (inputValue.trim().length > 0) { // 글자수가 0보다 클 때
-            setIsValid(true);
-        }
-
-        setEnteredText(inputValue)
-    }
 
     return (
         <>
-            <div className='form-wrapper'>
-                <form className='insert-form' onSubmit={formSubmitHandler}>
-                    <input
-                        type='text'
-                        placeholder='할 일을 입력 후, 엔터를 누르세요!'
-                        onChange={goalChangeHandler}
-                        value={enteredText}
-                    />
-                    <button className='insert-btn' type="submit">
-                        <MdAdd />
-                    </button>
-                </form>
-            </div>
+            {open && (
+                <div className="form-wrapper">
+                    <form className="insert-form" onSubmit={submitHandler}>
+                        <input
+                            ref={$textInput}
+                            type="text"
+                            placeholder="할 일을 입력 후, 엔터를 누르세요!"
+                        />
+                    </form>
+                </div>
+            )}
+
+            <button
+                className={`insert-btn ${open ? 'open' : undefined}`}
+                onClick={onToggle}
+            >
+                <MdAdd />
+            </button>
         </>
     );
 };
