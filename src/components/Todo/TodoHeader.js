@@ -1,24 +1,26 @@
 import React from 'react';
 import './scss/TodoHeader.scss';
 
-const TodoHeader = () => {
+const TodoHeader = ({ countRestTodo }) => {
 
 
-    let today = new Date();
-    let year = today.getFullYear();
-    let month = today.getMonth() + 1;
-    let day = today.getDate();
-    let now = `${year}년 ${month}월 ${day}일 ㅎㅎ`;
+    const today = new Date();
 
-    const week = ['일', '월', '화', '수', '목', '금', '토']
-    let dayOfWeek = week[today.getDay()-1];
+    const dateString = today.toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+
+    const dayName = today.toLocaleDateString('ko-KR', { weekday: 'long' });
+
 
 
     return (
         <header>
-            <h1>{now}</h1>
-            <div className='day'>요일</div>
-            <div className='tasks-left'>할 일 개 남음</div>
+            <h1>{dateString}</h1>
+            <div className='day'>{dayName}</div>
+            <div className='tasks-left'>할 일 {countRestTodo}개 남음</div>
         </header>
     );
 };

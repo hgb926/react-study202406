@@ -29,14 +29,41 @@ const TodoTemplate = () => {
             done: false
         };
 
-
         setTodoList(prevTodoList => [...prevTodoList, newTodo])
     };
 
+    // 삭제 props
+    const removeTodo = (id) => {
+        setTodoList(todoList.filter(todo => todo.id !== id));
+    };
+
+    // 체크 props
+    const checkTodo = (id) => {
+        // 카피배열에 기존 배열 복사 후,
+        const copyTodoList = [...todoList];
+
+        // item에서 올려보낸 데이터 (id)로 탐색.
+        const foundTodo = copyTodoList.find(todo => todo.id === id);
+
+        // T F 반전
+        foundTodo.done = !foundTodo.done;
+
+        // setter를 통해 갱신.
+        setTodoList(copyTodoList);
+    };
+
+
+    // 남은 할 일 개수 세기
+    const countRestTodo = todoList.filter(todo => todo.done === false).length;
+
     return (
         <div className='TodoTemplate'>
-            <TodoHeader />
-            <TodoMain todos={todoList} />
+            <TodoHeader countRestTodo={countRestTodo} />
+            <TodoMain
+                todos={todoList}
+                onRemove={removeTodo}
+                onCheck={checkTodo}
+            />
             <TodoInput onAdd={addTodo} />
         </div>
     );
