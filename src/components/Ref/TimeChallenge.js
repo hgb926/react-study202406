@@ -1,34 +1,46 @@
 import React, { useState } from 'react';
 
+let timer;
+
 const TimerChallenge = ({ title, targetTime }) => {
 
     // 타이머가 시작되었는지를 확인하는 상태값
-    const [timerStarted, setTimerStarted] = React.useState(false);
+    const [timerStarted, setTimerStarted] = useState(false);
 
-    // 타겟 시간이 종료되었는지 여부
-    const [timerExpired, setTimerExpired] = React.useState(false);
+    // 타겟시간이 종료되었는지 여부
+    const [timerExpired, setTimerExpired] = useState(false);
+
 
     const startHandler = e => {
 
-        setTimeout(() => {
+        timer = setTimeout(() => {
             setTimerExpired(true);
-        }, targetTime * 1000) // 초 단위로 보내와서 밀리초로 환산.
+        }, targetTime * 1000);
 
-      setTimerStarted(true);
+        setTimerStarted(true);
     };
 
 
 
+
+    // 전역변수로 timer 설정시 5초 -> 1초 -> 1초 -> 5초를 연속클릭해보면
+    // 5초짜리 timer가 정상작동하지 않는 이유는
+    // 4개의 TimeChallenge컴포넌트가 1개의 timer를 공유하여
+    // 처음 5초짜리 timer가 1초짜리에 의해 덮어씌워지기 때문
+    const stopHandler = e => {
+        clearTimeout(timer);
+    };
+
     return (
         <section className="challenge">
             <h2>{title}</h2>
-            {timerExpired && <p>You Lost!</p> }
+            {timerExpired && <p>You lost!</p>}
             <p className="challenge-time">
                 {targetTime} second{targetTime > 1 ? 's' : ''}
             </p>
             <p>
-                <button onClick={startHandler}>
-                    {timerStarted ? "Stop" : "Start"} Challenge
+                <button onClick={timerStarted ? stopHandler : startHandler}>
+                    {timerStarted ? 'Stop' : 'Start'} Challenge
                 </button>
             </p>
             <p className={timerStarted ? 'active' : undefined}>
