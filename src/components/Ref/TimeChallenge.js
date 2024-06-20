@@ -1,6 +1,7 @@
-import React, { useState, useRef } from 'react';
+import React, {useState, useRef} from 'react';
+import ResultModal from './ResultModal';
 
-const TimerChallenge = ({ title, targetTime }) => {
+const TimerChallenge = ({title, targetTime}) => {
 
     // 타이머를 ref변수로 관리
     const timer = useRef();
@@ -23,27 +24,28 @@ const TimerChallenge = ({ title, targetTime }) => {
     };
 
 
-
     const stopHandler = e => {
         clearTimeout(timer.current);
     };
 
     return (
-        <section className="challenge">
-            <h2>{title}</h2>
-            {timerExpired && <p>You lost!</p>}
-            <p className="challenge-time">
-                {targetTime} second{targetTime > 1 ? 's' : ''}
-            </p>
-            <p>
-                <button onClick={timerStarted ? stopHandler : startHandler}>
-                    {timerStarted ? 'Stop' : 'Start'} Challenge
-                </button>
-            </p>
-            <p className={timerStarted ? 'active' : undefined}>
-                {timerStarted ? 'Time is running...' : 'Timer inactive'}
-            </p>
-        </section>
+        <>
+            { <ResultModal targetTime={targetTime} result="lost"/>}
+            <section className="challenge">
+                <h2>{title}</h2>
+                <p className="challenge-time">
+                    {targetTime} second{targetTime > 1 ? 's' : ''}
+                </p>
+                <p>
+                    <button onClick={timerStarted ? stopHandler : startHandler}>
+                        {timerStarted ? 'Stop' : 'Start'} Challenge
+                    </button>
+                </p>
+                <p className={timerStarted ? 'active' : undefined}>
+                    {timerStarted ? 'Time is running...' : 'Timer inactive'}
+                </p>
+            </section>
+        </>
     );
 };
 
