@@ -1,0 +1,28 @@
+.diaryForm {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+
+  input,
+  textarea {
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+  }
+
+  button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #555;
+    }
+  }
+}
