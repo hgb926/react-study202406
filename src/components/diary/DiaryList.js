@@ -1,14 +1,17 @@
 import React from 'react';
 import DiaryItem from './DiaryItem';
 import styles from './DiaryList.module.scss';
+import DiaryEntry from './DiaryEntry';
 
-const DiaryList = () => {
+const DiaryList = ({ diaries }) => {
     return (
-        <div className={styles.diaryList}>
-            {/* DiaryItem을 반복해서 렌더링 */}
-            <DiaryItem />
-        </div>
-    );
+        <>
+            { diaries.map(diary => (
+                <DiaryEntry key={diary.id} diary={diary} />
+            )) }
+        </>
+    )
+
 };
 
 export default DiaryList;
