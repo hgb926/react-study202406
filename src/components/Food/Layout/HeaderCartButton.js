@@ -12,6 +12,8 @@ const HeaderCartButton = ({ onShow }) => {
     // 장바구니 배열 가져오기
     const { cartItems } = useContext(CartContext);
 
+    const a = 10;
+
     const numberOfCart = cartItems.reduce((accum, current) => {
         return accum + current.amount;
     }, 0);
