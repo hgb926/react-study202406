@@ -1,6 +1,7 @@
 import React from 'react';
 import Home from './components/RouteExample/pages/home';
 import Products from './components/RouteExample/pages/Products';
+import ProductDetail from './components/RouteExample/pages/ProductDetail';
 import RootLayout from './components/RouteExample/layout/RootLayout';
 import ErrorPage from './components/RouteExample/pages/ErrorPage'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
         children: [
             { index: true, element: <Home /> }, // 상대경로.
             { path: 'products', element: <Products /> }, // ./가 알아서 붙는다
+            { path: 'products/:prodId/page/:pageNo', element: <ProductDetail />}
         ]
     },
 

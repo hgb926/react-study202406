@@ -1,6 +1,13 @@
 import React from 'react';
 import { Link } from "react-router-dom" // 새로고침을 막기 위한 컴포넌트
 
+const DUMMY_PRODUCTS = [
+    {id: 'p1', name: '세탁기'},
+    {id: 'p2', name: '에어컨'},
+    {id: 'p3', name: '청소기'},
+]
+
+
 const Products = () => {
 
     console.log("products!")
@@ -8,10 +15,15 @@ const Products = () => {
     return (
         <>
             <h1>My Products Page</h1>
-            <p>
-                    {/*   ..은 상위로 가라 (상대경로)   */}
-                <Link to=".." end>Home</Link>페이지로 이동하기
-            </p>
+            <ul>
+                {
+                    DUMMY_PRODUCTS.map(prod => (
+                        <li key={prod.id}>
+                            <Link to={`{${prod.id}/page/10}`} >{prod.name}</Link>
+                        </li>
+                    ))
+                }
+            </ul>
         </>
 )
     ;
