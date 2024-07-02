@@ -9,8 +9,8 @@ const Products = () => {
         <>
             <h1>My Products Page</h1>
             <p>
-                {/*<a href='/'>Home</a>페이지로 이동하기*/}
-                <Link to='/'>Home</Link>페이지로 이동하기
+                    {/*   ..은 상위로 가라 (상대경로)   */}
+                <Link to=".." end>Home</Link>페이지로 이동하기
             </p>
         </>
 )
