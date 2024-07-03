@@ -20,7 +20,7 @@ const MainNavigation = () => {
                     </li>
                     <li>
                                     {/* 상대경로 */}
-                        <NavLink to={'products'}  className={activeFn}>Products</NavLink>
+                        <NavLink to={'events'}  className={activeFn}>Events</NavLink>
                     </li>
                 </ul>
             </nav>
