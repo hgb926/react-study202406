@@ -6,7 +6,7 @@ const Events = () => {
 
     // loader가 리턴한 데이터 받아오기
     const eventList = useLoaderData();
-    console.log(eventList)
+    // console.log(eventList)
 
     return (
         <>

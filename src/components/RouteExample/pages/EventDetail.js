@@ -7,7 +7,7 @@ const EventDetail = () => {
     // 사용범위가 본인컴포넌트와 그 하위 컴포넌트 (children은 하위가 아니다.)
     // const ev = useLoaderData(); // 자신의 loader를 불러오는 훅
     const ev = useRouteLoaderData('event-detail'); // 부모의 loader를 불러오는 훅(지정한 id)
-
+    
     return <EventItem event={ev} />
 };
 
