@@ -1,21 +1,23 @@
-import React from 'react';
-import { useParams, useLoaderData } from 'react-router-dom'
+import React, { useEffect, useState } from 'react';
+import { useParams, useLoaderData, useRouteLoaderData } from 'react-router-dom'
+import EventItem from '../components/EventItem';
 
 const EventDetail = () => {
 
-    const { eventId: id } = useParams();
+    // 사용범위가 본인컴포넌트와 그 하위 컴포넌트 (children은 하위가 아니다.)
+    // const ev = useLoaderData(); // 자신의 loader를 불러오는 훅
+    const ev = useRouteLoaderData('event-detail'); // 부모의 loader를 불러오는 훅(지정한 id)
 
-    // const data = useLoaderData();
-    // console.log('loader data: ', data) // undefined
-    
-    // loader를 사용한 컴포넌트의 형제나 부모는 데이터를 받아올 수 없다.
-
-    return (
-        <>
-            <h1>EventDetail Page</h1>
-            <p>Event ID: {id}</p>
-        </>
-    );
+    return <EventItem event={ev} />
 };
 
 export default EventDetail;
+
+export const loader = async ({ params }) => {
+
+    const { eventId: id } = params;
+
+    const response = await fetch(`http://localhost:8282/events/${id}`);
+    return await response.json();
+
+}
