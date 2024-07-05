@@ -1,8 +1,11 @@
 import React from "react";
 import styles from './EventItem.module.scss';
-import { Link, useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams, useSubmit } from 'react-router-dom'
 
 const EventItem = ({ event }) => {
+
+    // action함수를 트리거하는 2번째 방법
+    // const submit = useSubmit();
 
     const { eventId: id } = useParams();
     const navigate = useNavigate();
