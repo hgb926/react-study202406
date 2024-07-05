@@ -1,10 +1,26 @@
 import React from "react";
 import styles from './EventItem.module.scss';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 const EventItem = ({ event }) => {
+
+    const { eventId: id } = useParams();
+    const navigate = useNavigate();
+
+    const deleteHandler = () => {
+
+        if (!window.confirm('정말 삭제하시겠습니까?')) return;
+
+        (async () => {
+            const response = await fetch(`http://localhost:8282/events/${id}`, {
+                method: "DELETE",
+            })
+            navigate(`..`);
+        })();
+    }
     
     const {
+        // 'event-id': id, // 여기서도 id를 받아올 수 있다.
         title, 
         desc: description,
         'img-url': image,
@@ -19,7 +35,7 @@ const EventItem = ({ event }) => {
             <p>{description}</p>
             <menu className={styles.actions}>
                 <Link to="edit">Edit</Link>
-                <button>Delete</button>
+                <button onClick={deleteHandler}>Delete</button>
             </menu>
         </article>
     );
