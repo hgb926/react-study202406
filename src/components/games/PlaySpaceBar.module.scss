@@ -1,0 +1,17 @@
+.wrap {
+  background-color: #222;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  width: 700px;
+
+  .tapHere {
+    border: 1px solid white;
+    background: lightgray;
+    color: black;
+    width: 60%;
+    margin: 0 auto;
+    padding: 5px 0;
+  }
+}
