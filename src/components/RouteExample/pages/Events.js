@@ -24,7 +24,7 @@ const Events = () => {
     // 더이상 가져올 데이터가 있는지 확인
     const [isFinish, setIsFinish] = useState(false);
 
-
+    
     // 서버로 목록 조회 요청보내기
     const loadEvents = async() => {
 
